@@ -4,3 +4,6 @@ pytest>=2.7.2
 setuptools-scm
 pytest-pep8
 pytest-mock
+
+requests
+fabric
