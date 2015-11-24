@@ -44,6 +44,9 @@ nosetests.xml
 coverage.xml
 *,cover
 
+# vim
+*.swp
+
 # Translations
 *.mo
 *.pot
