@@ -11,4 +11,5 @@ script:
 
 notifications:
   email:
+    - programmer.zhx@gmail.com
     - guangyizhang.jan@gmail.com

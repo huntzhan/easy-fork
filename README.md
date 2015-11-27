@@ -1,3 +1,7 @@
+# Build state
+
+[![Build Status](https://travis-ci.org/huntzhan/easy-fork.svg?branch=master)](https://travis-ci.org/huntzhan/easy-fork)
+
 # 中文版文档(TODO: 替换成英文文档)
 
 模块划分:
