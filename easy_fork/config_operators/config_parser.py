@@ -3,6 +3,7 @@
 from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
+
 def url_for_gh(user, proj_name):
     '''url example: https://github.com/huntzhan/easy-fork.git
     '''
@@ -10,6 +11,7 @@ def url_for_gh(user, proj_name):
         return 'https://github.com/' + user + '/' + proj_name + '.git'
     else:
         return None
+
 
 def parse_repo_for_gh():
     from config import GITHUB_REPOS
@@ -23,5 +25,3 @@ def parse_repo_for_gh():
                 urls_for_gh.append(url)
 
     return urls_for_gh
-
-
