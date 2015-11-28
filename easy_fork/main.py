@@ -26,8 +26,8 @@ Usage:
 def entry_point():
     args = docopt(CLI_DOC)
     print(args)
-    gitlab_config = load_gitlab_config(args['<gitlab_config_path>'])
-    repo_ids = load_repo_config(args['<repo_config_path>'])
+    gitlab_config = load_gitlab_config(args['--gitlab-config'])
+    repo_ids = load_repo_config(args['--repo-config'])
 
     gitlab_project_handler = GitLabProjectAPIHandler(gitlab_config)
 
