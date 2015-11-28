@@ -4,24 +4,25 @@ from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
 import os
+import shutil
 from fabric.api import lcd
 from fabric.operations import local
 
-DIR_REPOS = os.path.join(
-    os.path.dirname(__file__),
-    '../../downloads')
 
-
-def git_clone(repo, url):
-    if not os.path.exists(DIR_REPOS):
-        os.makedirs(DIR_REPOS)
-    repo_dir = os.path.join(DIR_REPOS, repo)
-    with lcd(DIR_REPOS):
-        if (local('git clone {0}'.format(url)).succeeded and
-                os.path.exists(repo_dir)):
-            return repo_dir
-        else:
-            return None
+def git_clone_to_dir(repo, url, local_repos_dir):
+    if not os.path.exists(local_repos_dir):
+        os.makedirs(local_repos_dir)
+    repo_dir = os.path.join(local_repos_dir, repo)
+    try:
+        with lcd(local_repos_dir):
+            if (local('git clone {0}'.format(url)).succeeded and
+                    os.path.exists(repo_dir)):
+                return repo_dir
+    except:
+        pass
+    if os.path.exists(repo_dir):
+        shutil.rmtree(repo_dir)
+    return None
 
 
 def git_push(dir, target):
