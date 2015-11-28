@@ -6,7 +6,7 @@ from __future__ import (division, absolute_import, print_function,
 import os
 import docopt
 
-from easy_fork.file_operators.gitlab_config_path import load_gitlab_config
+from easy_fork.file_operators.gitlab_config import load_gitlab_config
 from easy_fork.file_operators.repo_config import load_repo_config
 from easy_fork.git_repo_operations.git_repo_operator import (
     git_clone_to_dir,
