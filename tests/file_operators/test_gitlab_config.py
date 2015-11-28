@@ -13,7 +13,7 @@ def test_load_gitlab_config():
         'gitlab_config_for_testing.py',
     )
     obj = load_gitlab_config(gitlab_config_path)
-    assert 'http://xxx/' == obj.api_prefix
+    assert 'http://xxx' == obj.api_prefix
     assert 'testuser' == obj.username
     assert 'testpassword' == obj.password
     assert '12345' == obj.token

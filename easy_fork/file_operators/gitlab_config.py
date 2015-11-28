@@ -25,8 +25,7 @@ def load_gitlab_config(gitlab_config_path):
     gitlab_config = imp.load_source('gitlab_config', gitlab_config_path)
 
     api_prefix = getattr(gitlab_config, API_PREFIX)
-    if api_prefix[-1] != '/':
-        api_prefix += '/'
+    api_prefix = api_prefix.rstrip('/')
 
     return GitLabConfig(
         api_prefix=api_prefix,
