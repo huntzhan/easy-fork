@@ -25,6 +25,15 @@ def git_clone_to_dir(repo, url, local_repos_dir):
     return None
 
 
+def git_track_all_branches(repo_dir):
+    import StringIO
+    with lcd(repo_dir):
+        remotes = StringIO.StringIO(local('git branch -r', capture=True))
+        for line in remotes:
+            remote = line.strip().split(' ')[0]
+            local('git branch --track {0}'.format(remote))
+
+
 def git_push(dir, target):
     with lcd(dir):
         local('for remote in `git branch -r`; '
