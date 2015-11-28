@@ -33,9 +33,9 @@ def test_git_track_all_branches():
         git_track_all_branches(repo_dir)
         with lcd(repo_dir):
             track_branches = local('git branch --track', capture=True)
-            assert track_branches.find('master') > 0
-            assert track_branches.find('origin/HEAD') > 0
-            assert track_branches.find('origin/master') > 0
+            assert track_branches.find('master') >= 0
+            assert track_branches.find('origin/HEAD') >= 0
+            assert track_branches.find('origin/master') >= 0
     finally:
         shutil.rmtree(local_repos_dir)
 
