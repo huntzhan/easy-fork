@@ -46,6 +46,7 @@ coverage.xml
 
 # vim
 *.swp
+*.swo
 
 # Translations
 *.mo

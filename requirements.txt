@@ -3,6 +3,7 @@ pytest>=2.7.2
 # in the case that pip could not properly handle in offline environment.
 setuptools-scm
 pytest-pep8
+pytest-cov
 pytest-mock
 
 requests
