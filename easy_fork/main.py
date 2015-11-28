@@ -18,13 +18,14 @@ from easy_fork.gitlab_operations.project import GitLabProjectAPIHandler
 
 CLI_DOC = '''
 Usage:
-    easy-fork --gitlab-config <gitlab_config_path>
-              --repo-config <repo_config_path>
+    easy-fork --gitlab-config=<gitlab_config_path>
+              --repo-config=<repo_config_path>
 '''
 
 
 def entry_point():
     args = docopt(CLI_DOC)
+    print(args)
     gitlab_config = load_gitlab_config(args['<gitlab_config_path>'])
     repo_ids = load_repo_config(args['<repo_config_path>'])
 
