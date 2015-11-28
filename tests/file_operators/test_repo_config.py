@@ -4,7 +4,7 @@ from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
 import os
-from easy_fork.file_operators.repo_config_parser import (
+from easy_fork.file_operators.repo_config import (
     REPO_ID_TYPE_GITHUB,
     load_repo_config,
 )
