@@ -54,7 +54,7 @@ setup(
     install_requires=load_requirements('requirements.txt'),
     entry_points={
         'console_scripts': [
-            'easy_fork_cli = easy_fork.main:entry_point'
+            'easy-fork = easy_fork.main:entry_point'
         ],
     },
 )
