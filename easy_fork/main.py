@@ -4,7 +4,7 @@ from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
 import os
-import docopt
+from docopt import docopt
 
 from easy_fork.file_operators.gitlab_config import load_gitlab_config
 from easy_fork.file_operators.repo_config import load_repo_config
