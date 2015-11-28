@@ -7,7 +7,7 @@ install:
   - python setup.py -q install
 
 script:
-  - py.test
+  - py.test --cov-report=
 
 notifications:
   email:
