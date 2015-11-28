@@ -29,6 +29,8 @@ class GitLabRESTfulURL(object):
 
 def get_project_name(owner, repo):
     # return '{0}--{1}'.format(owner, repo)
+    repo = repo.replace('.', '-')
+    repo = repo.lower()
     return repo
 
 
