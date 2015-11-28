@@ -30,7 +30,7 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
 
     def check_exitences(self, repo_id):
         namespace_project_name = get_namespace_project_name(
-            self.namespace_id,
+            self.gitlab_config.groupname,
             get_project_name(repo_id.owner, repo_id.repo),
         )
 
