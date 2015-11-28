@@ -60,5 +60,5 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
             '/groups/{0}'.format(self.gitlab_config.groupname),
         )
         response = requests.get(url)
-        assert response.status_code == 200
+        assert response.status_code == 201
         return response.json()['id']
