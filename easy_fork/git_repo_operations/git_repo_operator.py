@@ -25,8 +25,20 @@ def git_clone_to_dir(repo, url, local_repos_dir):
     return None
 
 
-def git_push(dir, target):
-    with lcd(dir):
-        local('for remote in `git branch -r`; '
-              'do git branch --track $remote; done')
-        return local('git push {0} --all'.format(target)).succeeded
+def git_track_all_branches(repo_dir):
+    import StringIO
+    with lcd(repo_dir):
+        remotes = StringIO.StringIO(local('git branch -r', capture=True))
+        for line in remotes:
+            remote = line.strip().split(' ')[0]
+            local('git branch --track {0}'.format(remote))
+
+
+def git_push(repo_dir, tar_name, tar_url):
+    with lcd(repo_dir):
+        names = local('git remote', capture=True)
+        if names.find(tar_name) >= 0:
+            # todo: add error log
+            return False
+        local('git remote add {0} "{1}"'.format(tar_name, tar_url))
+        return local('git push {0} --all'.format(tar_name)).succeeded
