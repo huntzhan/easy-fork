@@ -12,20 +12,26 @@ API_PREFIX = 'GITLAB_API_PREFIX'
 USERNAME = 'EASYFORK_GITLAB_USERNAME'
 PASSWORD = 'EASYFORK_GITLAB_PASSWORD'
 TOKEN = 'EASYFORK_GITLAB_TOKEN'
+GROUPNAME = 'EASYFORK_GITLAB_GROUPNAME'
 
 
 GitLabConfig = namedtuple(
     'GitLabConfig',
-    ['api_prefix', 'username', 'password', 'token'],
+    ['api_prefix', 'username', 'password', 'token', 'groupname'],
 )
 
 
 def load_gitlab_config(gitlab_config_path):
     gitlab_config = imp.load_source('gitlab_config', gitlab_config_path)
-    keys = [API_PREFIX, USERNAME, PASSWORD, TOKEN]
+
+    api_prefix = getattr(gitlab_config, API_PREFIX)
+    if api_prefix[-1] != '/':
+        api_prefix += '/'
+
     return GitLabConfig(
-        api_prefix=getattr(gitlab_config, API_PREFIX),
+        api_prefix=api_prefix,
         username=getattr(gitlab_config, USERNAME),
         password=getattr(gitlab_config, PASSWORD),
         token=getattr(gitlab_config, TOKEN),
+        groupname=getattr(gitlab_config, GROUPNAME),
     )
