@@ -21,14 +21,14 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
 
     # return a string for `git remote add` operation.
     def create_project(self, repo_id):
-        success, url = self.check_exitences(repo_id)
+        success, url = self.check_existence(repo_id)
         if not success:
             self.post_project(repo_id)
-        success, url = self.check_exitences(repo_id)
+        success, url = self.check_existence(repo_id)
         assert success
         return url
 
-    def check_exitences(self, repo_id):
+    def check_existence(self, repo_id, auto_info=True):
         namespace_project_name = get_namespace_project_name(
             self.gitlab_config.groupname,
             get_project_name(repo_id.owner, repo_id.repo),
@@ -42,9 +42,11 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
             return False, None
         else:
             response_json = response.json()
-            return True, self.attach_auth_info(
-                response_json['http_url_to_repo'],
-            )
+            if auto_info:
+                repo_remote = response_json['http_url_to_repo']
+                if auto_info:
+                    repo_remote = self.attach_auth_info(repo_remote)
+            return True, repo_remote
 
     def post_project(self, repo_id):
         body = {

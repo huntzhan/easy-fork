@@ -49,7 +49,9 @@ def entry_point():
 
     if args['view-names-mapping']:
         for repo_id in repo_ids:
-            success, url = gitlab_project_handler.check_exitences(repo_id)
+            success, url = gitlab_project_handler.check_existence(
+                repo_id, auto_info=False,
+            )
             template = "| [{0}]({1}) | `{2}` |"
             msg = template.format(
                 repo_id.fullname, repo_id.url,
