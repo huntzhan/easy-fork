@@ -50,7 +50,9 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
         body = {
             'name': get_project_name(repo_id.owner, repo_id.repo),
             'namespace_id': self.namespace_id,
+            # make public.
             'public': True,
+            'visibility_level': 20,
         }
         url = self.url_template.format('/projects')
         response = requests.post(url, json=body)
