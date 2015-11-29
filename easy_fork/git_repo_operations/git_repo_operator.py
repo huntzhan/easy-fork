@@ -13,6 +13,10 @@ def git_clone_to_dir(repo, url, local_repos_dir):
     if not os.path.exists(local_repos_dir):
         os.makedirs(local_repos_dir)
     repo_dir = os.path.join(local_repos_dir, repo)
+    # skip if dir already exists.
+    if os.path.exists(repo_dir):
+        return None
+
     try:
         with lcd(local_repos_dir):
             if (local('git clone {0}'.format(url)).succeeded and
