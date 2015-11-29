@@ -22,9 +22,7 @@ CLI_DOC = '''
 Usage:
     easy-fork --gitlab-config=<gitlab_config_path>
               --repo-config=<repo_config_path>
-    easy-fork view-names-mapping
-              --gitlab-config=<gitlab_config_path>
-              --repo-config=<repo_config_path>
+              [view-names-mapping]
     easy-fork search-repo <language> <stars_lower_bound> <stars_upper_bound>
 '''
 
