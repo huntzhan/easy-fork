@@ -35,7 +35,7 @@ def git_track_all_branches(repo_dir):
         remotes = StringIO.StringIO(local('git branch -r', capture=True))
         for line in remotes:
             remote = line.strip().split(' ')[0]
-            local('git branch --track {0}'.format(remote))
+            local('git branch --track "{0}"'.format(remote))
 
 
 def git_push(repo_dir, tar_name, tar_url):
