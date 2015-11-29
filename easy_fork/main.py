@@ -39,6 +39,11 @@ def entry_point():
             repo_id.url,
             local_repos_dir,
         )
+
+        if repo_dir is None:
+            print('Skipping {0}'.format(repo_id.fullname))
+            continue
+
         # create project in gitlab.
         remote_url = gitlab_project_handler.create_project(repo_id)
         # configure local git repo and push.
