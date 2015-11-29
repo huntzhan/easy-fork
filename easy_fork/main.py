@@ -22,6 +22,9 @@ CLI_DOC = '''
 Usage:
     easy-fork --gitlab-config=<gitlab_config_path>
               --repo-config=<repo_config_path>
+    easy-fork view-names-mapping
+              --gitlab-config=<gitlab_config_path>
+              --repo-config=<repo_config_path>
     easy-fork search-repo <language> <stars_lower_bound> <stars_upper_bound>
 '''
 
@@ -45,6 +48,17 @@ def entry_point():
     repo_ids = load_repo_config(args['--repo-config'])
 
     gitlab_project_handler = GitLabProjectAPIHandler(gitlab_config)
+
+    if args['view-names-mapping']:
+        for repo_id in repo_ids:
+            success, url = gitlab_project_handler.check_exitences(repo_id)
+            template = "| [{0}]({1}) | `{2}` |"
+            msg = template.format(
+                repo_id.fullname, repo_id.url,
+                url if success else 'Not Forked Yet.',
+            )
+            print(msg)
+        return 0
 
     local_repos_dir = os.getcwd()
     for repo_id in repo_ids:
