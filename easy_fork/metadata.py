@@ -4,7 +4,7 @@ from __future__ import (division, absolute_import, print_function,
 
 
 NAME = 'easy_fork'
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 AUTHORS = [
     'huntzhan',
 ]
