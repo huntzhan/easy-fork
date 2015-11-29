@@ -15,17 +15,32 @@ from easy_fork.git_repo_operations.git_repo_operator import (
 )
 from easy_fork.gitlab_operations.project import GitLabProjectAPIHandler
 
+from easy_fork.github_search.repositories import search_repos
+
 
 CLI_DOC = '''
 Usage:
     easy-fork --gitlab-config=<gitlab_config_path>
               --repo-config=<repo_config_path>
+    easy-fork search-repo <language> <stars_lower_bound> <stars_upper_bound>
 '''
 
 
 def entry_point():
     args = docopt(CLI_DOC)
     print(args)
+
+    if args['search-repo']:
+        items = search_repos(
+            args['<language>'],
+            args['<stars_lower_bound>'],
+            args['<stars_upper_bound>'],
+        )
+        # simple print full names.
+        for item in items:
+            print("'{0}'".format(item['full_name']))
+        return 0
+
     gitlab_config = load_gitlab_config(args['--gitlab-config'])
     repo_ids = load_repo_config(args['--repo-config'])
 
