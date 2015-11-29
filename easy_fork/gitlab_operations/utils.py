@@ -3,6 +3,8 @@
 from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
+import re
+
 
 class GitLabRESTfulURL(object):
 
@@ -28,10 +30,11 @@ class GitLabRESTfulURL(object):
 
 
 def get_project_name(owner, repo):
-    # return '{0}--{1}'.format(owner, repo)
-    repo = repo.replace('.', '-')
-    repo = repo.lower()
-    return repo
+    name = 'gh-{0}-{1}'.format(owner, repo)
+    name = name.lower()
+    name = re.sub('[^a-z]+', '-', name)
+    name = re.sub('\-+', '-', name)
+    return name
 
 
 def get_namespace_project_name(namespace_name, project_name):

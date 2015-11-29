@@ -4,7 +4,10 @@ from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
 
 from easy_fork.file_operators.gitlab_config import GitLabConfig
-from easy_fork.gitlab_operations.utils import GitLabRESTfulURL
+from easy_fork.gitlab_operations.utils import (
+    GitLabRESTfulURL,
+    get_project_name,
+)
 
 
 gitlab_config = GitLabConfig(
@@ -26,3 +29,11 @@ def test_attach_auth_info():
     obj = GitLabRESTfulURL(gitlab_config)
     assert ('http://testuser:testpassword@abc' ==
             obj.attach_auth_info('http://abc'))
+
+
+def test_get_project_name():
+    assert ('gh-vundlevim-vundle-vim' ==
+            get_project_name('VundleVim', 'Vundle.vim'))
+
+    assert ('gh-a-b-c' ==
+            get_project_name('a-------b', '------#@(----c'))
