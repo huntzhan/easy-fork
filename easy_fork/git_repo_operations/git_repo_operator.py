@@ -19,7 +19,7 @@ def git_clone_to_dir(repo, url, local_repos_dir):
 
     try:
         with lcd(local_repos_dir):
-            if (local('git clone {0}'.format(url)).succeeded and
+            if (local('git clone "{0}"'.format(url)).succeeded and
                     os.path.exists(repo_dir)):
                 return repo_dir
     except:
