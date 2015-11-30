@@ -37,3 +37,6 @@ def test_get_project_name():
 
     assert ('gh-a-b-c' ==
             get_project_name('a-------b', '------#@(----c'))
+
+    assert ('gh-a-9-b-8-c' ==
+            get_project_name('a---9---b', '------#@(--8--c'))

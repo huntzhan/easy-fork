@@ -32,7 +32,7 @@ class GitLabRESTfulURL(object):
 def get_project_name(owner, repo):
     name = 'gh-{0}-{1}'.format(owner, repo)
     name = name.lower()
-    name = re.sub('[^a-z]+', '-', name)
+    name = re.sub('[^a-z0-9]+', '-', name)
     name = re.sub('\-+', '-', name)
     return name
 
