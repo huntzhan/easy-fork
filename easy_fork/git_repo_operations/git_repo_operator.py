@@ -5,10 +5,11 @@ from __future__ import (division, absolute_import, print_function,
 
 import os
 import shutil
-# import StringIO
+import StringIO
 
 from fabric.api import lcd
 from fabric.operations import local
+from fabric.context_managers import settings
 
 
 def git_clone_to_dir(repo, url, local_repos_dir):
@@ -33,17 +34,19 @@ def git_clone_to_dir(repo, url, local_repos_dir):
 
 def git_track_all_branches(repo_dir):
     with lcd(repo_dir):
-        cmd = '''
-for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master`;
-do
-    git branch --track "${branch##*/}" "$branch"
-done
-'''
-        local(cmd)
-        # remotes = StringIO.StringIO(local('git branch -r', capture=True))
-        # for line in remotes:
-        #     remote = line.strip().split(' ')[0]
-        #     local('git branch --track "{0}"'.format(remote))
+        get_branches_cmd = (
+            'git branch -a | grep remotes | '
+            'grep -v HEAD | grep -v master'
+        )
+        remotes = StringIO.StringIO(local(get_branches_cmd, capture=True))
+        for remote in remotes:
+            remote = remote.strip()
+            track_branch_cmd = 'git branch --track "{0}" "{1}"'.format(
+                remote.split('/')[-1],
+                remote,
+            )
+            with settings(warn_only=True):
+                local(track_branch_cmd)
 
 
 def git_push(repo_dir, tar_name, tar_url):
