@@ -38,14 +38,14 @@ def git_track_all_branches(repo_dir):
             'git branch -a | grep remotes | '
             'grep -v HEAD | grep -v master'
         )
-        remotes = StringIO.StringIO(local(get_branches_cmd, capture=True))
-        for remote in remotes:
-            remote = remote.strip()
-            track_branch_cmd = 'git branch --track "{0}" "{1}"'.format(
-                remote.split('/')[-1],
-                remote,
-            )
-            with settings(warn_only=True):
+        with settings(warn_only=True):
+            remotes = StringIO.StringIO(local(get_branches_cmd, capture=True))
+            for remote in remotes:
+                remote = remote.strip()
+                track_branch_cmd = 'git branch --track "{0}" "{1}"'.format(
+                    remote.split('/')[-1],
+                    remote,
+                )
                 local(track_branch_cmd)
 
 
