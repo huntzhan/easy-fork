@@ -5,6 +5,8 @@ from __future__ import (division, absolute_import, print_function,
 
 import os
 import shutil
+# import StringIO
+
 from fabric.api import lcd
 from fabric.operations import local
 
@@ -30,12 +32,18 @@ def git_clone_to_dir(repo, url, local_repos_dir):
 
 
 def git_track_all_branches(repo_dir):
-    import StringIO
     with lcd(repo_dir):
-        remotes = StringIO.StringIO(local('git branch -r', capture=True))
-        for line in remotes:
-            remote = line.strip().split(' ')[0]
-            local('git branch --track "{0}"'.format(remote))
+        cmd = '''
+for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master`;
+do
+    git branch --track ${branch##*/} $branch
+done
+'''
+        local(cmd)
+        # remotes = StringIO.StringIO(local('git branch -r', capture=True))
+        # for line in remotes:
+        #     remote = line.strip().split(' ')[0]
+        #     local('git branch --track "{0}"'.format(remote))
 
 
 def git_push(repo_dir, tar_name, tar_url):
