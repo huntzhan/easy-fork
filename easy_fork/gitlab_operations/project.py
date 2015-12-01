@@ -42,10 +42,9 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
             return False, None
         else:
             response_json = response.json()
+            repo_remote = response_json['http_url_to_repo']
             if auto_info:
-                repo_remote = response_json['http_url_to_repo']
-                if auto_info:
-                    repo_remote = self.attach_auth_info(repo_remote)
+                repo_remote = self.attach_auth_info(repo_remote)
             return True, repo_remote
 
     def post_project(self, repo_id):
