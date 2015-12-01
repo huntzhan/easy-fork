@@ -56,4 +56,6 @@ def git_push(repo_dir, tar_name, tar_url):
             # todo: add error log
             return False
         local('git remote add {0} "{1}"'.format(tar_name, tar_url))
+        # push HEAD first.
+        local('git push {0} HEAD'.format(tar_name))
         return local('git push {0} --all'.format(tar_name)).succeeded
