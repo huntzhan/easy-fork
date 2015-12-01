@@ -18,3 +18,4 @@ def test_load_gitlab_config():
     assert 'testpassword' == obj.password
     assert '12345' == obj.token
     assert 'testgroup' == obj.groupname
+    assert '1234' == obj.groupid

@@ -13,11 +13,12 @@ USERNAME = 'EASYFORK_GITLAB_USERNAME'
 PASSWORD = 'EASYFORK_GITLAB_PASSWORD'
 TOKEN = 'EASYFORK_GITLAB_TOKEN'
 GROUPNAME = 'EASYFORK_GITLAB_GROUPNAME'
+GROUPID = 'EASYFORK_GITLAB_GROUPID'
 
 
 GitLabConfig = namedtuple(
     'GitLabConfig',
-    ['api_prefix', 'username', 'password', 'token', 'groupname'],
+    ['api_prefix', 'username', 'password', 'token', 'groupname', 'groupid'],
 )
 
 
@@ -33,4 +34,5 @@ def load_gitlab_config(gitlab_config_path):
         password=getattr(gitlab_config, PASSWORD),
         token=getattr(gitlab_config, TOKEN),
         groupname=getattr(gitlab_config, GROUPNAME),
+        groupid=getattr(gitlab_config, GROUPID),
     )

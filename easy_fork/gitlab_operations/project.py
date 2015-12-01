@@ -61,6 +61,9 @@ class GitLabProjectAPIHandler(GitLabRESTfulURL):
         assert response.status_code == 201
 
     def get_namespace_id(self):
+        if self.gitlab_config.groupid:
+            return self.gitlab_config.groupid
+
         url = self.url_template.format(
             '/groups/{0}'.format(self.gitlab_config.groupname),
         )

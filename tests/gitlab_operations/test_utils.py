@@ -16,6 +16,7 @@ gitlab_config = GitLabConfig(
     password='testpassword',
     token='Fapjifjea21',
     groupname='testgroup',
+    groupid='1234',
 )
 
 
