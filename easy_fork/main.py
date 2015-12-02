@@ -10,7 +10,7 @@ from easy_fork.file_operators.gitlab_config import load_gitlab_config
 from easy_fork.file_operators.repo_config import load_repo_config
 from easy_fork.git_repo_operations.git_repo_operator import (
     git_clone_to_dir,
-    git_track_all_branches,
+    # git_track_all_branches,
     git_push,
 )
 from easy_fork.gitlab_operations.project import GitLabProjectAPIHandler
@@ -76,5 +76,5 @@ def entry_point():
         # create project in gitlab.
         remote_url = gitlab_project_handler.create_project(repo_id)
         # configure local git repo and push.
-        git_track_all_branches(repo_dir)
+        # git_track_all_branches(repo_dir)
         git_push(repo_dir, 'git-oa', remote_url)
